@@ -1,4 +1,4 @@
-DeepPose – Yoga Pose Recognition & Real-Time Correction System
+DeepPose – Yoga Pose Recognition & Real-Time
 DeepPose is an AI-powered yoga pose recognition system that uses deep learning, sequence modeling, and pose estimation to classify yoga poses and provide real-time correction feedback.
 The system is built for academic research, fitness applications, and real-time digital coaching.
 
