@@ -116,7 +116,7 @@ Realtime visual overlay
 Real-time correction messages
 
 Works on CPU or GPU
-
+``
 📊 Results
 High accuracy for 5–6 yoga classes
 
@@ -125,7 +125,7 @@ Stable real-time pose recognition
 Correction system based on angle deviation
 
 Confusion matrix and logs included
-
+``
 🚀 Future Work
 Add more yoga poses
 
@@ -137,4 +137,3 @@ Mobile version with TensorFlow Lite
 
 👤 Author
 Adnan Shami
-Final Year CSE Student
