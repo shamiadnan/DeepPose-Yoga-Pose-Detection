@@ -1,3 +1,4 @@
+#Import required libraries
 import cv2, torch, torch.nn as nn, numpy as np
 from torchvision import transforms, models
 from torchvision.models import ResNet18_Weights
@@ -5,7 +6,7 @@ from collections import deque
 import mediapipe as mp
 from config import *
 
-# Load model
+# Load trained checkpoints and retsore ResNet-18 model architecture
 ckpt = torch.load(CKPT_DIR / "resnet18_yoga_best.pth", map_location=DEVICE)
 model = models.resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)
 model.fc = nn.Linear(model.fc.in_features, len(ckpt["classes"]))
@@ -13,13 +14,14 @@ model.load_state_dict(ckpt["model_state"])
 model.to(DEVICE).eval()
 classes = ckpt["classes"]
 
-# Preprocessing
+# Preprocessing transforms
 val_tf = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize(MEAN, STD)
 ])
 
+#Helper function: preprocess OpenCV frame for ResNet
 def preprocess(frame):
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     from PIL import Image
@@ -99,3 +101,4 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
 cap.release()
 cv2.destroyAllWindows()
+
