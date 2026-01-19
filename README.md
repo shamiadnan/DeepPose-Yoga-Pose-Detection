@@ -1,139 +1,67 @@
-##DeepPose – Yoga Pose Recognition & Real-Time
-DeepPose is an AI-powered yoga pose recognition system that uses deep learning, sequence modeling, and pose estimation to classify yoga poses and provide real-time correction feedback.
-The system is built for academic research, fitness applications, and real-time digital coaching.
+# DeepPose: AI-Powered Yoga Pose Recognition and Correction
 
-##⭐ Project Features
-Yoga Pose Recognition from videos or webcam
+DeepPose is a real-time yoga posture recognition and correction system built using **PyTorch, MediaPipe, and OpenCV**.  
+It acts as a virtual yoga instructor, analyzing poses via webcam and providing instant corrective feedback to ensure safe and effective practice.
 
-Pose keypoint extraction using MoveNet / Mediapipe
+---
 
-Keypoint sequence generation (30-frame sliding window)
+## 📌 Features
+- Real-time yoga pose recognition using **ResNet-18** (transfer learning).
+- Landmark detection with **MediaPipe Pose** (33 skeletal points).
+- Rule-based feedback engine for corrective guidance (e.g., "Bend knee more").
+- Overlay visualization: skeleton, pose label, confidence score, feedback text.
+- Supports 5 yoga poses: **Downdog, Goddess, Plank, Tree, Warrior II**.
+- Lightweight, runs locally on CPU/GPU with webcam input.
 
-Conv1D + LSTM model for temporal yoga pose classification
+---
 
-Real-time pose detection on webcam
-
-Real-time correction feedback using angle deviations
-
-Complete dataset pipeline
-
-Google Colab training notebook included
-
-##🧠 Tech Stack
-Python 3.10
-
-PyTorch
-
-TensorFlow Hub (MoveNet)
-
-Mediapipe
-
-OpenCV
-
-NumPy / Pandas
-
-Google Colab (GPU training)
-
-VS Code (Realtime inference)
-
-📂 Repository Structure
-bash
-Copy code
+## 📂 Project Structure
 DeepPose/
-│
-├── README.md
-├── requirements.txt
-│
-├── notebooks/
-│   └── DeepPose_Training_Notebook.ipynb
-│
-├── src/
-│   ├── extract_sequences.py
-│   ├── train_model.py
-│   ├── realtime_demo.py
-│   ├── model.py
-│   ├── utils.py
-│   └── angle_templates.py
-│
-├── data/
-│   ├── raw_videos/                 # Your training videos go here
-│   ├── processed_sequences/
-│   ├── sequences/
-│   └── templates/
-│
-├── models/
-│   ├── deeppose_seq_best.pth       # Trained sequence model
-│   └── template_angles.npy         # Correction template
-│
-└── results/
-    ├── confusion_matrix.png
-    └── training_logs/
-📥 Dataset Preparation
-Create folders for each pose:
+│── main.py                                # Entry point for real-time detection
+│── config.py                            # Configuration (paths, thresholds, device)
+│── requirements.txt              # Dependencies
+│── checkpoints/           # Trained model weights (.pth file)
+│── logs/                  # Training logs
+│── docs/                  # Diagrams, training curves, screenshots
+│── examples/              # Sample input/output images
 
-bash
-Copy code
-data/raw_videos/
-  tree/
-  warrior/
-  mountain/
-  triangle/
-  downward_dog/
-Add 10–50 videos per pose (5–10 seconds each).
-Alternatively, use images (code supports both).
 
-🧪 Training Pipeline (Google Colab)
-The notebook inside /notebooks performs:
+---
 
-Install dependencies
 
-Upload dataset
+## 📊 Results & Analysis
+- **Training Accuracy:** ~90% validation accuracy across 25 epochs.
+- **Training Curves:**
+  - Loss steadily decreased for both training and validation.
+  - Accuracy stabilized around 0.9, showing strong generalization.
+- **Pose Recognition:**
+  - High accuracy: Plank, Tree, Downdog.
+  - Lower confidence: Warrior II, Goddess (due to pose similarity and dataset imbalance).
+- **Real-Time Demo:** Achieved >25 FPS on standard laptop webcam.
 
-Extract pose keypoints using MoveNet
+<img width="1500" height="600" alt="training_curves" src="https://github.com/user-attachments/assets/c96cefb9-7b4d-4054-a066-6ef613f2b70d" />
+<img width="873" height="636" alt="webcam demo" src="https://github.com/user-attachments/assets/9eac7094-5180-4356-a95b-abf6c9ce5319" />
 
-Build fixed-length keypoint sequences
+---
 
-Train ConvLSTM model
+## 🚀 Future Enhancements
+- Expand dataset to cover more yoga poses and should be train the model by videos for better accuracy.
+- Mobile deployment (TensorFlow Lite / ONNX).
+- Voice-based feedback (Text-to-Speech).
+- Sequence modeling with LSTM/Transformers for dynamic yoga flows.
+- Gamification and AR guidance for interactive practice.
+- Cloud integration for personalized progress tracking.
 
-Evaluate + save best model
+---
 
-Generate correction angle templates
+## 📚 References
+- PyTorch Documentation
+- MediaPipe Pose
+- Toshev, A., & Szegedy, C. (2014). DeepPose: Human Pose Estimation via Deep Neural Networks. CVPR.
+- Kaggle Yoga Dataset
 
-The final trained model appears in /models.
+---
 
-🎥 Real-Time Yoga Detection (Local VS Code)
-Run:
-
-bash
-Copy code
-python src/realtime_demo.py
-Features:
-
-Webcam-based pose recognition
-
-Realtime visual overlay
-
-Real-time correction messages
-
-Works on CPU or GPU
-``
-📊 Results
-High accuracy for 5–6 yoga classes
-
-Stable real-time pose recognition
-
-Correction system based on angle deviation
-
-Confusion matrix and logs included
-``
-🚀 Future Work
-Add more yoga poses
-
-Use Vision Transformers for pose classification
-
-Deploy as a web app (Gradio / Streamlit)
-
-Mobile version with TensorFlow Lite
-
-👤 Author
-Adnan Shami
+## 👨‍💻Author
+- **Adnan Shami**
+- Guided by **Prof. Ramkrishna Pal**
