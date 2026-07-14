@@ -1,0 +1,12 @@
+class_id,class_name
+0,Bridge_Pose
+1,Chair_Pose
+2,Child_Pose
+3,Cobra_Pose
+4,Downdog_Pose
+5,Goddess_Pose
+6,Plank_Pose
+7,Tree_Pose
+8,Triangle_Pose
+9,Warrior1_Pose
+10,Warrior2_Pose

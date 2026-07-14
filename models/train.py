@@ -43,6 +43,9 @@ class YogaDataset(Dataset):
     
     def __getitem__(self, idx: int) -> Tuple[torch.Tensor, int]:
         img_path = self.image_paths[idx]
+        # Allow PIL to load truncated/partial images without raising OSError
+        from PIL import ImageFile
+        ImageFile.LOAD_TRUNCATED_IMAGES = True
         image = Image.open(img_path).convert("RGB")
         label = self.labels[idx]
         
@@ -202,18 +205,18 @@ class DatasetManager:
         val_dataset = YogaDataset(val_paths, val_labels, self.eval_transform)
         test_dataset = YogaDataset(test_paths, test_labels, self.eval_transform)
         
-        # Create DataLoaders
+        # Create DataLoaders (num_workers=0 for single-process loading compatibility)
         train_loader = DataLoader(
             train_dataset, batch_size=self.batch_size,
-            shuffle=True, num_workers=2, pin_memory=True
+            shuffle=True, num_workers=0, pin_memory=False
         )
         val_loader = DataLoader(
             val_dataset, batch_size=self.batch_size,
-            shuffle=False, num_workers=2, pin_memory=True
+            shuffle=False, num_workers=0, pin_memory=False
         )
         test_loader = DataLoader(
             test_dataset, batch_size=self.batch_size,
-            shuffle=False, num_workers=2, pin_memory=True
+            shuffle=False, num_workers=0, pin_memory=False
         )
         
         print(f"\n[DatasetManager] Split complete:")
